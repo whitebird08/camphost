@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  form(action='' method='post') 
+    div
+      p
+      input#datepicker(type='text', placeholder='select a date')
+    div
+      input(type='submit' name='signup' value='Reserve')

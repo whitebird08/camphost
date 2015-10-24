@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  form(action='/campers/register' method='post') 
+    div
+    input(type='text' name='email' placeholder='email@example.com' required) 
+    div
+    input(type='text' name='password' placeholder='password' required) 
+    div
+      input(type='submit' name='signup' value='Register')

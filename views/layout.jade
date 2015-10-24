@@ -2,6 +2,30 @@ doctype html
 html
   head
     title= title
+    link(rel='stylesheet', href='https://bootswatch.com/cosmo/bootstrap.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
+
+    link(rel='stylesheet', href='//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css')
+    //- link(rel='stylesheet', href='/resources/demos/style.css')
+    script(src='//code.jquery.com/jquery-1.10.2.js')
+    script(src='//code.jquery.com/ui/1.11.4/jquery-ui.js')
+
+  body  
+      nav.navbar.navbar-default.navbar-fixed-top
+        .container-fluid
+          .navbar-header
+            ol.breadcrumb
+                li
+                  a(href='/') Home
+                li
+                  a(href='/campgrounds/cgsAll') Campgrounds
+
+          .navbar-right
+            ol.breadcrumb
+              li
+                a(href='/campers/register') Register
+              li
+                a(href='/campers/login') Log In
+
     block content
+    
