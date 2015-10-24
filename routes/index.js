@@ -74,6 +74,9 @@ router.post('/reservations/index', function(req, res, next){
   res.redirect('/campers/dash')
 })
 
+// router.post('/reservations/logout', function(req, res, next){
+//   res.redirect('/index')
+// })
 
 
 

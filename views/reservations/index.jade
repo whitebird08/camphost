@@ -5,8 +5,9 @@ block content
   p Welcome to #{title}
 
   form(action='' method='post') 
-    div
-      p
-      input#datepicker(type='text', placeholder='select a date')
+    label(for='from') From
+    input#from(type='text', name='from')
+    label(for='to') to
+    input#to(type='text', name='to')
     div
       input(type='submit' name='signup' value='Reserve')
