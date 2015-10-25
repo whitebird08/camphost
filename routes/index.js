@@ -1,5 +1,12 @@
 var express = require('express');
 var router = express.Router();
+var db = require('monk')('localhost/camphost-db');
+var Campgrounds = db.get('campground');
+var Sites = db.get('site');
+var Reservations = db.get('reservation')
+var Campers = db.get('camper');
+
+var bcrypt = require('bcrypt');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -26,37 +33,35 @@ router.get('/campers/register', function(req, res, next) {
   res.render('campers/register', { title: 'Camper Registration' });
 });
 
-// router.post('/heroes/signup', function(req, res, next){
-//   var hash = bcrypt.hashSync(req.body.password, 8)
-//   Hero.findOne({email:req.body.email}).then(function(hero){
-//     if (hero === ''){
-//       res.render('heroes/signup', {error: 'Email / Password cannot be blank'})
-//     }
-//     if (hero){
-//       res.render('heroes/signup', {error: 'Invalid Email/Password'})
-//     } else {
-//       Hero.insert({email:req.body.email, password:hash}).then(function(hero){
-//         res.redirect('/heroes/signin')
-//       })
-//     }
-//   })
+router.post('/campers/register', function(req, res, next){
+  var hash = bcrypt.hashSync(req.body.password, 8)
+  Campers.findOne({email:req.body.email}).then(function(camper){
+    if (camper === ''){
+      res.render('campers/register', {error: 'Email / Password cannot be blank'})
+    }
+    if (camper){
+      res.render('campers/register', {title: 'Camper Registration', error: 'Invalid Email/Password'})
+    } else {
+      Campers.insert({email:req.body.email, password:hash}).then(function(camper){
+        res.redirect('/campers/login')
+      })
+    }
+  })
 
-// })
+})
 
-// router.post('/heroes/signin', function(req, res,next){
-//        console.log('MMMMMMMMMMMMMMMMMMMMMMM')
-//   Hero.findOne({email:req.body.email}).then(function(hero){
-//     if (hero) {  
-//       if (bcrypt.compareSync(req.body.password, hero.password)){
-//         req.session.hero = hero
-//          console.log('YYYYYYYYYYYYYYYYYYYYYYY')
-//         res.redirect('/heroes/dash')
-//       } else {
-//         res.render('heroes/signin', {error: 'Invalid Email/Password'})
-//       }
-//     }
-//   })
-// })
+router.post('/campers/login', function(req, res,next){
+  Campers.findOne({email:req.body.email}).then(function(camper){
+    if (camper) {  
+      if (bcrypt.compareSync(req.body.password, camper.password)){
+        req.session.camper = camper
+        res.redirect('/campers/dash')
+      } else {
+        res.render('campers/login', {title: 'Camper Login' , error: 'Invalid Email/Password'})
+      }
+    }
+  })
+})
 
 router.get('/campers/login', function(req, res, next) {
   res.render('campers/login', { title: 'Camper Login' });
@@ -71,6 +76,7 @@ router.get('/reservations/index', function(req, res, next) {
 });
 
 router.post('/reservations/index', function(req, res, next){
+
   res.redirect('/campers/dash')
 })
 

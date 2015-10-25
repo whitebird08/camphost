@@ -4,9 +4,11 @@ block content
   h1= title
   p Welcome to #{title}
 
+  include ../error.jade
+
   form(action='/campers/register' method='post') 
     div
-    input(type='text' name='email' placeholder='email@example.com' required) 
+    input(type='email' name='email' placeholder='email@example.com' required) 
     div
     input(type='text' name='password' placeholder='password' required) 
     div
