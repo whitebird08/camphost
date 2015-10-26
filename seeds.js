@@ -15,9 +15,9 @@ var siteId02 = site.id(),
 var siteId03 = site.id(),
 
 //reservation = resId, arrivalDate, lengthOfStay, parkId, loopName, siteNum, siteType, camperId
-var reserveId01 = reservation.id(),
-var reserveId02 = reservation.id(),
-var reserveId03 = reservation.id()
+var reservationId01 = reservation.id(),
+var reservationId02 = reservation.id(),
+var reservationId03 = reservation.id()
 
 //camper =  camperId, email, password
 var joeId = camper.id(),
@@ -52,7 +52,7 @@ Promise.all([
     return Promise.all([
       Campgrounds.insert({
         facilityName:"MORRAINE PARK"
-        parkId:"50032", 
+        facilityId:"190306", 
         landmarkName:true, 
         landmarkLat:37.84035, 
         landmarkLong:-122.4888889
@@ -60,14 +60,14 @@ Promise.all([
 
       Campgrounds.insert({
         facilityName:"GLACIER BASIN"
-        parkId:"50032", 
+        facilityId:"190307", 
         landmarkName:true, 
         landmarkLat:37.84035, 
         landmarkLong:-122.4888889
       }),
       Campgrounds.insert({
         facilityName:"ASPEN GLEN"
-        parkId:"50032", 
+        facilityId:"190308", 
         landmarkName:true, 
         landmarkLat:37.84035, 
         landmarkLong:-122.4888889
@@ -81,19 +81,19 @@ Promise.all([
       Sites.insert({
         parkId:"50032", 
         loopName:"A", 
-        siteNum: "1582", 
+        siteId: "1582", 
         siteType:"2003"
       },
       {
-        parkId:"50032", 
+        parkId:"50033", 
         loopName:"B", 
-        siteNum: "1582", 
+        siteId: "1582", 
         siteType:"2003"
       },
       {
-        parkId:"50032", 
+        parkId:"50034", 
         loopName:"C", 
-        siteNum: "1582", 
+        siteId: "1582", 
         siteType:"2003"
       }
       ),
@@ -111,7 +111,7 @@ Promise.all([
         lengthOfStay:4, 
         parkId:"50032", 
         loopName:"B", 
-        siteNum:"1582", 
+        siteId:"1582", 
         siteType:"2003", 
         camperId:"123456123456123456123454"
       },
@@ -121,7 +121,7 @@ Promise.all([
         lengthOfStay:3, 
         parkId:"50032", 
         loopName:"B", 
-        siteNum:"1582", 
+        siteId:"1582", 
         siteType:"2003", 
         camperId:"123456123456123456123453"
       },
@@ -131,7 +131,7 @@ Promise.all([
         lengthOfStay:1, 
         parkId:"50032", 
         loopName:"B", 
-        siteNum:"1582", 
+        siteId:"1582", 
         siteType:"2003", 
         camperId:"123456123456123456123452"
       },
@@ -141,7 +141,7 @@ Promise.all([
         lengthOfStay:2, 
         parkId:"50032", 
         loopName:"B", 
-        siteNum:"1582", 
+        siteId:"1582", 
         siteType:"2003", 
         camperId:"123456123456123456123451"
       }
