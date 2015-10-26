@@ -18,6 +18,7 @@ router.get('/campgrounds/cgsAll', function(req, res, next) {
 });
 
 router.get('/campgrounds/cg', function(req, res, next) {
+  // return campgroundApi();
   res.render('campgrounds/cg', { title: 'Campground Name Here' });
 });
 

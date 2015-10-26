@@ -55,5 +55,15 @@ li {
   color: green;
 }
 
-
+table {
+  padding-top: 50px;
+  background-color: green;
+  opacity: 0.5;
+  margin: auto;
+  width:400px;
+  height:200px;
+}
+th {
+  text-align: center;
+}
 

@@ -4,7 +4,7 @@ block content
   h1= title
   p Welcome to #{title}
 
-  form(action='' method='post') 
+  form(action='reservations/index' method='post') 
     label(for='from') From
     input#from(type='text', name='from')
     label(for='to') to

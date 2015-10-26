@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cookieSession = require('cookie-session');
 require('dotenv').load()
+var unirest = require('unirest');
+// var dotenv = require('dotenv').load()
 
 var routes = require('./routes/index');
 // var users = require('./routes/users');
@@ -35,6 +37,12 @@ app.use(cookieSession({
   process.env.SESSION_KEY2
   ]
 }));
+
+// app.use(dotenv({
+//   keys: [
+//   process.env.CAMGROUND_API_KEY
+//   ]
+// }))
 
 app.use('/', routes);
 // app.use('/users', users);
