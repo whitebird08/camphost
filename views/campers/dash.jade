@@ -4,17 +4,28 @@ block content
   h1= title
   //- p Welcome to #{title}
 
-  li
-    a(href='/campgrounds/cgsAll') View All Campgrounds
+  h2 Your Reservations List
 
   table(border = '0')
     thead
       tr
-        th Your Reservations List
-        th
-    tbody
+        th Arrival Date
+        th Length Of Stay
+        th Campground
+        th Loop
+        th Site
+        th Site Type
+    for reservations in allReservations
       tr
-        td info goes here
+        td= reservations.arrivalDate
+        td= reservations.lengthOfStay
+        td= reservations.facilityName
+        td= reservations.loopName
+        td= reservations.siteId
+        td= reservations.siteType
+
+
+
 
 
 

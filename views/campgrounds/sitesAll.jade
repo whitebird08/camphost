@@ -6,3 +6,16 @@ block content
 
   li
     a(href='/campgrounds/site') Select A Site
+//probably don't need this page because all sites are displayed on cg page
+
+    //- table
+    //-   thead
+    //-     tr
+    //-       th All Sites
+    //-       th
+    //-   for sites in allSites
+    //-     tr
+    //-       td= sites.loopName
+    //-       td= sites.siteId
+    //-       td= sites.siteType
+    //-       a(href='/campgrounds/site/' + site._id) Select

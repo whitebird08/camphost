@@ -4,29 +4,30 @@ var Sites = db.get('site');
 var Reservations = db.get('reservation')
 var Campers = db.get('camper');
 
-//campground = facilityName, parkId, landmarkName, landmarkLat, landmarkLong, detailDescription
-var morraineParkId = campground.id(),
-var glacierBasinId = campground.id(),
-var aspenGlenId = campground.id()
+// campground = facilityName, parkId, landmarkName, landmarkLat, landmarkLong, detailDescription
+var morraineParkId = Campgrounds.id()
+var glacierBasinId = Campgrounds.id()
+var aspenGlenId = Campgrounds.id()
 
 // site = parkId, loopName, siteNum, siteType
-var siteId01 = site.id(),
-var siteId02 = site.id(),
-var siteId03 = site.id(),
+var siteId01 = Sites.id()
+var siteId02 = Sites.id()
+var siteId03 = Sites.id()
 
-//reservation = resId, arrivalDate, lengthOfStay, parkId, loopName, siteNum, siteType, camperId
-var reservationId01 = reservation.id(),
-var reservationId02 = reservation.id(),
-var reservationId03 = reservation.id()
+// reservation = resId, arrivalDate, lengthOfStay, parkId, loopName, siteNum, siteType, camperId
+var reservationId01 = Reservations.id()
+var reservationId02 = Reservations.id()
+var reservationId03 = Reservations.id()
 
-//camper =  camperId, email, password
-var joeId = camper.id(),
-    sueId = camper.id(),
-    timId = camper.id(),
-    kimId = camper.id()
+// camper =  camperId, email, password
+var joeId = Campers.id()
+var sueId = Campers.id()
+var timId = Campers.id()
+var kimId = Campers.id()
+console.log('starting')
 
 Promise.all([
-  users.remove().then(function () {
+  Campers.remove().then(function () {
     return Promise.all([
       Campers.insert({
         _id: joeId, 
@@ -47,11 +48,12 @@ Promise.all([
     ])
   }),
 
-  //campground = facilityName, parkId, landmarkName, landmarkLat, landmarkLong, detailDescription
+  // campground = facilityName, parkId, landmarkName, landmarkLat, landmarkLong, detailDescription
   Campgrounds.remove().then(function () {
     return Promise.all([
       Campgrounds.insert({
-        facilityName:"MORRAINE PARK"
+        parkId:"50032",
+        facilityName:"MORRAINE PARK",
         facilityId:"190306", 
         landmarkName:true, 
         landmarkLat:37.84035, 
@@ -59,14 +61,16 @@ Promise.all([
       }),
 
       Campgrounds.insert({
-        facilityName:"GLACIER BASIN"
+        parkId:"50033",
+        facilityName:"GLACIER BASIN",
         facilityId:"190307", 
         landmarkName:true, 
         landmarkLat:37.84035, 
         landmarkLong:-122.4888889
       }),
       Campgrounds.insert({
-        facilityName:"ASPEN GLEN"
+        parkId:"50034",
+        facilityName:"ASPEN GLEN",
         facilityId:"190308", 
         landmarkName:true, 
         landmarkLat:37.84035, 
@@ -83,30 +87,26 @@ Promise.all([
         loopName:"A", 
         siteId: "1582", 
         siteType:"2003"
-      },
-      {
+      }),
+      Sites.insert({
         parkId:"50033", 
         loopName:"B", 
         siteId: "1582", 
         siteType:"2003"
-      },
-      {
+      }),
+      Sites.insert({
         parkId:"50034", 
         loopName:"C", 
         siteId: "1582", 
         siteType:"2003"
-      }
-      ),
-
+      }),
     ])
   }),
 
   Reservations.remove({}).then(function () {
     return Promise.all([
-
-      Reservations.insert(
-      {
-        facilityName:"ASPEN GLEN"
+      Reservations.insert({
+        facilityName:"ASPEN GLEN",
         arrivalDate:'02/01/2016', 
         lengthOfStay:4, 
         parkId:"50032", 
@@ -114,9 +114,9 @@ Promise.all([
         siteId:"1582", 
         siteType:"2003", 
         camperId:"123456123456123456123454"
-      },
-      {
-        facilityName:"GLACIER BASIN"
+      }),
+      Reservations.insert({
+        facilityName:"GLACIER BASIN",
         arrivalDate:'01/01/2016', 
         lengthOfStay:3, 
         parkId:"50032", 
@@ -124,9 +124,9 @@ Promise.all([
         siteId:"1582", 
         siteType:"2003", 
         camperId:"123456123456123456123453"
-      },
-      { 
-        facilityName:"MORRAINE PARK"
+      }),
+      Reservations.insert({
+        facilityName:"MORRAINE PARK",
         arrivalDate:'12/01/2015', 
         lengthOfStay:1, 
         parkId:"50032", 
@@ -134,9 +134,9 @@ Promise.all([
         siteId:"1582", 
         siteType:"2003", 
         camperId:"123456123456123456123452"
-      },
-      { 
-        facilityName:"MORRAINE PARK"
+      }),
+      Reservations.insert({
+        facilityName:"MORRAINE PARK",
         arrivalDate:'11/01/2015', 
         lengthOfStay:2, 
         parkId:"50032", 
@@ -144,10 +144,10 @@ Promise.all([
         siteId:"1582", 
         siteType:"2003", 
         camperId:"123456123456123456123451"
-      }
-      )
+      })
     ])
   }),
 ]).then(function () {
+  console.log("HERE")
   db.close()
 })

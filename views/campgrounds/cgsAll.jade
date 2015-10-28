@@ -4,5 +4,12 @@ block content
   h1= title
   p Welcome to #{title}
 
-  li
-    a(href='/campgrounds/cg') Select A Campground
+    table
+      thead
+        tr
+          th All Campgrounds
+          th
+      for campgrounds in allCampgrounds
+        tr
+          td= campgrounds.facilityName
+            a(href='/campgrounds/cg/' + campgrounds._id) Select

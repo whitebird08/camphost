@@ -4,10 +4,30 @@ block content
   h1= title
   p Welcome to #{title}
 
-  form(action='reservations/index' method='post') 
-    label(for='from') From
-    input#from(type='text', name='from')
-    label(for='to') to
-    input#to(type='text', name='to')
+
+
+  form(action='/reservations/index' method='post') 
+    //- table
+    //-     thead
+    //-       tr
+    //-         th loopName
+    //-         th siteId
+    //-         th siteType
+    //-     tbody
+    //-       tr
+    //-         td= sites.parkId
+            //- td= thisSite.loopName
+            //- td= thisSite.siteId
+            //- td= thisSite.siteType
+    label Arrival Date
+    input#datepicker(type='text')
+    label Length Of Stay
+    input#datepicker(type='text')
+    //- label(for='arrivalDate')
+    //- input#from(type='text', name='from')
+    //- //- label(for='from') From
+    //- //- input#from(type='text', name='from')
+    //- label(for='to') to
+    //- input#to(type='text', name='to')
     div
       input(type='submit' name='signup' value='Reserve')

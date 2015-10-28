@@ -1,29 +1,30 @@
 $(document).ready(function() {
   console.log("The document is ready!");
 
-  $(function() {
-    $( "#from" ).datepicker({
-      autoSize:true,
-      defaultDate: "+1w",
-      changeMonth: true,
-      numberOfMonths: 3,
-      onClose: function( selectedDate ) {
-        $( "#to" ).datepicker( "option", "minDate", selectedDate );
-      }
-    });
-    $( "#to" ).datepicker({
-      autoSize:true,
-      defaultDate: "+1w",
-      changeMonth: true,
-      numberOfMonths: 3,
-      onClose: function( selectedDate ) {
-        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
-      }
-    });
-  });
-  // $('.input-daterange input').each(function() {
-  //     $(this).datepicker("clearDates");
+  // $(function() {
+  //   $( "#from" ).datepicker({
+  //     autoSize:true,
+  //     defaultDate: "+1w",
+  //     changeMonth: true,
+  //     numberOfMonths: 3,
+  //     onClose: function( selectedDate ) {
+  //       $( "#to" ).datepicker( "option", "minDate", selectedDate );
+  //     }
+  //   });
+  //   $( "#to" ).datepicker({
+  //     autoSize:true,
+  //     defaultDate: "+1w",
+  //     changeMonth: true,
+  //     numberOfMonths: 3,
+  //     onClose: function( selectedDate ) {
+  //       $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+  //     }
+  //   });
   // });
+
+  $(function() {
+      $( "#datepicker" ).datepicker();
+    });
 
 //   router.get('/books', function(req, res, next) {
 //   unirest.get('http://api.nytimes.com/svc/books/v3/lists/hardcover-fiction.json?api-key=' + NYT_API_KEY)

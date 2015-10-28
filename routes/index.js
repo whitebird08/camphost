@@ -5,8 +5,13 @@ var Campgrounds = db.get('campground');
 var Sites = db.get('site');
 var Reservations = db.get('reservation')
 var Campers = db.get('camper');
+//var Dbq = require ('./lib/dbq_functions.js')
 
 var bcrypt = require('bcrypt');
+
+// router.get('/', function(req, res, next) Dbq.all.then
+//   res.render('index', { title: 'Camp Host' });
+// });
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -14,20 +19,29 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/campgrounds/cgsAll', function(req, res, next) {
-  res.render('campgrounds/cgsAll', { title: 'All Campgrounds' });
+  Campgrounds.find({}, function (err, campgrounds){
+    res.render('campgrounds/cgsAll', { title: 'All Campgrounds', allCampgrounds: campgrounds 
+    });
+  });
+});
+       
+router.get('/campgrounds/cg/:id', function(req, res, next) {
+  Sites.find({}, function (err, sites) {
+    res.render('campgrounds/cg', { title: 'Campground Name Here', allSites: sites
+    });
+  });
 });
 
-router.get('/campgrounds/cg', function(req, res, next) {
-  // return campgroundApi();
-  res.render('campgrounds/cg', { title: 'Campground Name Here' });
-});
-
-router.get('/campgrounds/sitesAll', function(req, res, next) {
-  res.render('campgrounds/sitesAll', { title: 'All Sites For This Campground' });
-});
-
-router.get('/campgrounds/site', function(req, res, next) {
-  res.render('campgrounds/site', { title: 'Site Number' });
+// router.get('/campgrounds/sitesAll', function(req, res, next) {
+//   Sites.find({}, function (err, sites){
+//   res.render('campgrounds/sitesAll', { title: 'All Sites For This Campground', allSites: sites });
+//   })
+// });
+           
+router.get('/campgrounds/site/:id', function(req, res, next) {
+  Sites.findOne({_id: req.params.id}, function (err, sites){
+  res.render('campgrounds/site', { title: 'Site Number', thisSite: sites });
+  })
 });
 
 router.get('/campers/register', function(req, res, next) {
@@ -69,17 +83,43 @@ router.get('/campers/login', function(req, res, next) {
 });
 
 router.get('/campers/dash', function(req, res, next) {
-  res.render('campers/dash', { title: 'Camper Dashboard' });
+  Reservations.find({}, function (err, reservations){
+  // Reservations.find({ camperId: { $in: req.params} }, function (err, reservations){  
+    res.render('campers/dash', { title: 'Camper Dashboard', allReservations: reservations 
+    });
+  })
 });
 
 router.get('/reservations/index', function(req, res, next) {
-  res.render('reservations/index', { title: 'Make A Reservation' });
+  Sites.findOne({_id: req.params.id}, function (err, sites){
+  res.render('reservations/index', { title: 'Make A Reservation', thisSite: sites });
+  });
 });
 
 router.post('/reservations/index', function(req, res, next){
-
+  // var facilityName = req.body.facilityName; ?????
+  Reservations.insert(req.params, {
+    "facilityName" : req.body.facilityName,
+    "arrivalDate" : req.body.arrivalDate,
+    "lengthOfStay" : req.body.lengthOfStay,
+    "parkId" : req.body.parkId,
+    "loopName" : req.body.loopName,
+    "siteId" : req.body.siteId,
+    "siteType" : req.body.siteType,
+    "camperId" : req.body.camperId
+  });
   res.redirect('/campers/dash')
 })
+
+router.post('/shoes', function(req, res, next) {
+  var shoe_brand = req.body.shoe_brand;
+  var shoe_model = req.body.shoe_model;
+  shoesCollection.insert({ 
+                          shoe_brand: req.body.shoe_brand,
+                          shoe_model: req.body.shoe_model
+  })
+  res.redirect('/shoes')
+});
 
 // router.post('/reservations/logout', function(req, res, next){
 //   res.redirect('/index')

@@ -2,9 +2,19 @@ extends ../layout
 
 block content
   h1= title
-  p Welcome to #{title}
+     
+  h2 All Sites In This Campground
 
-  li
-    a(href='/campgrounds/sitesAll') View Sites
+  table
+    thead
+      tr
+        th loopName
+        th siteId
+        th siteType
+    for sites in allSites
+      tr
+        td= sites.loopName
+        td= sites.siteId
+        td= sites.siteType
+          a(href='/campgrounds/site/' + sites._id) Select
 
-  

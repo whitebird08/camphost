@@ -1,4 +1,5 @@
-
+$(document).ready(function() {
+  console.log("The document is ready! Yo....");
 
 $(function() {
   var map;
@@ -23,4 +24,6 @@ $(function() {
   }
 
   initialize();
+});
+
 });
