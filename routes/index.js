@@ -5,6 +5,7 @@ var Campgrounds = db.get('campground');
 var Sites = db.get('site');
 var Reservations = db.get('reservation')
 var Campers = db.get('camper');
+
 //var Dbq = require ('./lib/dbq_functions.js')
 
 var bcrypt = require('bcrypt');
@@ -110,16 +111,6 @@ router.post('/reservations/index', function(req, res, next){
   });
   res.redirect('/campers/dash')
 })
-
-router.post('/shoes', function(req, res, next) {
-  var shoe_brand = req.body.shoe_brand;
-  var shoe_model = req.body.shoe_model;
-  shoesCollection.insert({ 
-                          shoe_brand: req.body.shoe_brand,
-                          shoe_model: req.body.shoe_model
-  })
-  res.redirect('/shoes')
-});
 
 // router.post('/reservations/logout', function(req, res, next){
 //   res.redirect('/index')
