@@ -6,6 +6,15 @@ var Sites = db.get('site');
 var Reservations = db.get('reservation')
 var Campers = db.get('camper');
 
+var dbqFunctions = require("../lib/dbq.js");
+
+// {
+//   joinReservationSites: [function]
+// }
+
+var tmp = dbqFunctions.joinReservationSites(['res1', 'res2'], ['site1', 'site2']);
+console.log(tmp)
+
 //var Dbq = require ('./lib/dbq_functions.js')
 
 var bcrypt = require('bcrypt');
@@ -98,16 +107,16 @@ router.get('/reservations/index', function(req, res, next) {
 });
 
 router.post('/reservations/index', function(req, res, next){
-  // var facilityName = req.body.facilityName; ?????
+  joinCamperReservation();
   Reservations.insert(req.params, {
-    "facilityName" : req.body.facilityName,
-    "arrivalDate" : req.body.arrivalDate,
-    "lengthOfStay" : req.body.lengthOfStay,
-    "parkId" : req.body.parkId,
-    "loopName" : req.body.loopName,
-    "siteId" : req.body.siteId,
-    "siteType" : req.body.siteType,
-    "camperId" : req.body.camperId
+    "facilityName" : reservation.campground.facilityName,
+    "arrivalDate" : reservation.campground.arrivalDate,
+    "lengthOfStay" : reservation.campground.lengthOfStay,
+    "parkId" : reservation.site.parkId,
+    "loopName" : reservation.site.loopName,
+    "siteId" : reservation.site.siteId,
+    "siteType" : reservation.site.siteType,
+    "camperId" : reservation.camper.camperId
   });
   res.redirect('/campers/dash')
 })

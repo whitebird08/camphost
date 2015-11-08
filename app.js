@@ -14,6 +14,7 @@ var routes = require('./routes/index');
 var campgrounds = require('./routes/cg');
 var reservations = require('./routes/res');
 var campers = require('./routes/campers');
+// var dbq = require('../lib/dbq')
 
 
 var app = express();
@@ -29,7 +30,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(express.static(path.join(__dirname, 'lib')));
 app.use(cookieSession({
   name:'session',
   keys: [

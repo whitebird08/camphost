@@ -4,44 +4,30 @@ block content
   h1= title
   p Welcome to #{title}
 
-
-
     form(action='/reservations/index' method='post') 
-      //- table
-      //-     thead
-      //-       tr
-      //-         th loopName
-      //-         th siteId
-      //-         th siteType
-      //-     tbody
-      //-       tr
-      //-         td= sites.parkId
-              //- td= thisSite.loopName
-              //- td= thisSite.siteId
-              //- td= thisSite.siteType
-      div
-        label Facility Name 
-        input(type='text' name='facilityName')
+      //- div
+      //-   label Facility Name 
+      //-   input(type='text' name='facilityName' value='')
       div
         label Arrival Date
-        input#datepicker(type='text')
+        input#datepicker(type='text' name='arrivalDate' )
       div
         label Length Of Stay
-        input(type='text' name='lengthOfStay')
-      div
-        label Park Id
-        input(type='text' name='parkId')
-      div
-        label Loop Name
-        input(type='text' name='loopName')
-      div
-        label Site Id
-        input(type='text' name='siteId')
-      div
-        label Site Type
-        input(type='text' name='siteType')
-      div
-        label Camper Id
-        input(type='text' name='camperId')
+        input(type='text' name='lengthOfStay' value='')
+      //- div
+      //-   label Park Id
+      //-   input(type='text' name='parkId' value='')
+      //- div
+      //-   label Loop Name
+      //-   input(type='text' name='loopName' value= "#{thisSite.siteId}" )
+      //- div
+      //-   label Site Idx`x
+      //-   input(type='text' name='siteId' value='')
+      //- div
+      //-   label Site Type
+      //-   input(type='text' name='siteType' value='')
+      //- div
+      //-   label Camper Id
+      //-   input(type='text' name='camperId' value='')
       div
         input(type='submit' name='signup' value='Reserve')

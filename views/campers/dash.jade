@@ -9,6 +9,7 @@ block content
   table(border = '0')
     thead
       tr
+        th Reservations Id
         th Arrival Date
         th Length Of Stay
         th Campground
@@ -17,6 +18,7 @@ block content
         th Site Type
     for reservations in allReservations
       tr
+        td= reservations._id
         td= reservations.arrivalDate
         td= reservations.lengthOfStay
         td= reservations.facilityName

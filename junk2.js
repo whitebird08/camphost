@@ -39,7 +39,7 @@ var joinReservationCamper = function(reservation, camper){
 
 var joinCamperReservation = function(camper, reservation){
   Campers.forEach(function (camper){
-    reservations.forEach(function (reservation){
+    Reservations.forEach(function (reservation){
       if(camper.reservationId === reservation._id){
         camper.reservation = reservation
       }
@@ -52,12 +52,13 @@ router.post('/reservations/index', function(req, res, next){
   Reservations.insert(req.params, {
     "facilityName" : reservation.campground.facilityName
     "arrivalDate" : reservation.campground.arrivalDate,
-    "lengthOfStay" : reservation.lengthOfStay
-    "parkId" : reservation.parkId
-    "loopName" : reservation.loopName
-    "siteId" : reservation.siteId
-    "siteType" : reservation.siteType
-    "camperId" : reservation.camperId
+    "lengthOfStay" : reservation.campground.lengthOfStay
+        //req.params?????^^
+    "parkId" : reservation.site.parkId
+    "loopName" : reservation.site.loopName
+    "siteId" : reservation.site.siteId
+    "siteType" : reservation.site.siteType
+    "camperId" : reservation.camper.camperId
 
   });
   res.redirect('/campers/dash')
@@ -70,5 +71,12 @@ router.post('/reservations/index', function(req, res, next){
 //how do i pass in the camp ground/site api data to the collections?()
 //how do i display the google map 
 // and display pins from campground api lat and long?
+
+router.get('/reservations/index', function(req, res, next){
+  var camperReservations = campers.(function(camper){
+    return camper.reservationId
+  })
+  camper.find({_id{$in: reservationIds}}).then(function (c))
+}
 
 
