@@ -12,8 +12,8 @@ var dbqFunctions = require("../lib/dbq.js");
 //   joinReservationSites: [function]
 // }
 
-var tmp = dbqFunctions.joinReservationSites(['res1', 'res2'], ['site1', 'site2']);
-console.log(tmp)
+// var tmp = dbqFunctions.joinReservationSites(['res1', 'res2'], ['site1', 'site2']);
+// console.log(tmp)
 
 //var Dbq = require ('./lib/dbq_functions.js')
 
@@ -25,7 +25,7 @@ var bcrypt = require('bcrypt');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Camp Host' });
+  res.render('index', { title: 'Cause for Claws' });
 });
 
 router.get('/campgrounds/cgsAll', function(req, res, next) {
