@@ -5,8 +5,7 @@ body {
 /*  font-weight: bold;*/
   text-align: center;
   padding-top: 200px;
-  background: url( http://www.animalhi.com/download/view?resolution=1920x1080&file=MTkyMHgxMDgwLzIwMTIxMDI3L3JlcHRpbGVzIGlndWFuYSAxOTIweDEwODAgd2FsbHBhcGVyX3d3dy5hbmltYWxoaS5jb21fNDQuanBn&name=cmVwdGlsZXNfaWd1YW5hXzE5MjB4MTA4MF93YWxscGFwZXI=);
-  /*background: url(https://images.unsplash.com/photo-1414016642750-7fdd78dc33d9?dpr=0.67&fit=crop&fm=jpg&h=2275&q=80&w=4325);*/
+  background: url(https://images.unsplash.com/photo-1414016642750-7fdd78dc33d9?dpr=0.67&fit=crop&fm=jpg&h=2275&q=80&w=4325);
   background-size: cover;
 
 }
@@ -73,3 +72,9 @@ td {
   color:white;
 }
 
+#map {
+  width: 500px;
+  height: 300px;
+  background-color: #CCC;
+  margin: auto; 
+}

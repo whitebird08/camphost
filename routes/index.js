@@ -19,13 +19,8 @@ var dbqFunctions = require("../lib/dbq.js");
 
 var bcrypt = require('bcrypt');
 
-// router.get('/', function(req, res, next) Dbq.all.then
-//   res.render('index', { title: 'Camp Host' });
-// });
-
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Cause for Claws' });
+  res.render('index', { title: 'Camp Host' });
 });
 
 router.get('/campgrounds/cgsAll', function(req, res, next) {
