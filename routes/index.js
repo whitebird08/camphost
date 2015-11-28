@@ -25,6 +25,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/campgrounds/cgsAll', function(req, res, next) {
   Campgrounds.find({}, function (err, campgrounds){
+    
     res.render('campgrounds/cgsAll', { title: 'All Campgrounds', allCampgrounds: campgrounds 
     });
   });
