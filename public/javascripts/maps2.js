@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  console.log("The map document is ready!");
+  console.log("The maps2 document is ready!");
 
 	var myLatlng = new google.maps.LatLng(39.5403, -106.0600);
 	var mapOptions = {
@@ -15,7 +15,6 @@ $(document).ready(function() {
 		    position: testArray[i],
 		    title:"Hello Campground"
 		});
-
 // To add the marker to the map, call setMap();
 	marker.setMap(map);
 	};

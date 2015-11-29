@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var cookieSession = require('cookie-session');
 require('dotenv').load()
 var unirest = require('unirest');
+var cors = require('cors');
 
 var routes = require('./routes/index');
 // var users = require('./routes/users');
@@ -14,6 +15,7 @@ var campgrounds = require('./routes/cg');
 var reservations = require('./routes/res');
 var campers = require('./routes/campers');
 // var dbq = require('../lib/dbq')
+
 
 
 var app = express();
@@ -37,6 +39,8 @@ app.use(cookieSession({
   process.env.SESSION_KEY2
   ]
 }));
+
+app.use(cors());
 
 app.use('/', routes);
 // app.use('/users', users);
