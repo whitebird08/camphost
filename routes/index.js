@@ -31,16 +31,17 @@ router.get('/campgrounds/cgsAll', function(req, res, next) {
   .end(function (response) {
     // console.log(response.body, 'is response.body')
     var campgrounds = response.body
+    
     var latSubstring = response.body.slice(response.body.indexOf('latitude'))
     // console.log(latSubstring)
     var latValue = latSubstring.substring(10, 20)
     console.log(latValue, 'LLLLLLLLLLLLLLLLLATTTTT')
 
-    var longSubstring = response.body.slice(response.body.indexOf('latitude'))
+    var longSubstring = response.body.slice(response.body.indexOf('longitude'))
     // console.log(longSubstring)
-    var longValue = longSubstring.substring(33, 45)
+    var longValue = longSubstring.substring(11, 23)
     console.log(longValue, 'LLLLLLLLLLLLLLLLLONGGGGG')
-    // var displayData = campgrounds.getElementsByTagName("resultset")
+
     res.render('campgrounds/cgsAll', { title: 'All Campgrounds', campgrounds:campgrounds
     });
   });
