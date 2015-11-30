@@ -7,6 +7,8 @@ var Reservations = db.get('reservation')
 var Campers = db.get('camper');
 var dbqFunctions = require("../lib/dbq.js");
 var unirest = require('unirest');
+// var xmlToJSON = require('xmlToJSON');
+
 
 // {
 //   joinReservationSites: [function]
@@ -27,21 +29,32 @@ router.get('/campgrounds/cgsAll', function(req, res, next) {
   console.log('ZZZZZZZZZZZZZZZ')
   unirest.get( "http://api.amp.active.com/camping/campgrounds?pname=ASPEN&api_key=6x8gz7qm68nwaj9ckzg3z5yg")
   .end(function (response) {
-    console.log(response.body)
+    // console.log(response.body, 'is response.body')
     var campgrounds = response.body
+    var latSubstring = response.body.slice(response.body.indexOf('latitude'))
+    // console.log(latSubstring)
+    var latValue = latSubstring.substring(10, 20)
+    console.log(latValue, 'LLLLLLLLLLLLLLLLLATTTTT')
 
-        res.render('campgrounds/cgsAll', { title: 'All Campgrounds', campgrounds:campgrounds
+    var longSubstring = response.body.slice(response.body.indexOf('latitude'))
+    // console.log(longSubstring)
+    var longValue = longSubstring.substring(33, 45)
+    console.log(longValue, 'LLLLLLLLLLLLLLLLLONGGGGG')
+    // var displayData = campgrounds.getElementsByTagName("resultset")
+    res.render('campgrounds/cgsAll', { title: 'All Campgrounds', campgrounds:campgrounds
     });
   });
 });
+
 /////
+
 // router.get('/campgrounds/cgsAll', function(req, res, next) {
 //   Campgrounds.find({}, function (err, campgrounds){   
 //     res.render('campgrounds/cgsAll', { title: 'All Campgrounds', allCampgrounds: campgrounds 
 //     });
 //   });
 // });
-       
+
 router.get('/campgrounds/cg/:id', function(req, res, next) {
   Sites.find({}, function (err, sites) {
     res.render('campgrounds/cg', { title: 'Campground Name Here', allSites: sites

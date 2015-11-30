@@ -4,14 +4,6 @@ getCampground: function(){
 
 getSite: function()
 
-  
-
-
-
-
-
-
-
 
 function(req, res, next) {
   Campgrounds.find({}, function (err, campgrounds){

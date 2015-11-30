@@ -56,8 +56,8 @@ Promise.all([
         facilityName:"MORRAINE PARK",
         facilityId:"190306", 
         landmarkName:true, 
-        landmarkLat:37.84035, 
-        landmarkLong:-122.4888889
+        landmarkLat:39.4135, 
+        landmarkLong:-106.4888889
       }),
 
       Campgrounds.insert({
@@ -65,16 +65,16 @@ Promise.all([
         facilityName:"GLACIER BASIN",
         facilityId:"190307", 
         landmarkName:true, 
-        landmarkLat:37.84035, 
-        landmarkLong:-122.4888889
+        landmarkLat:39.82035, 
+        landmarkLong:-106.4888889
       }),
       Campgrounds.insert({
         parkId:"50034",
         facilityName:"ASPEN GLEN",
         facilityId:"190308", 
         landmarkName:true, 
-        landmarkLat:37.84035, 
-        landmarkLong:-122.4888889
+        landmarkLat:39.83035, 
+        landmarkLong:-106.4888889
       }),
 
     ])

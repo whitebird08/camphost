@@ -20,3 +20,15 @@ $(document).ready(function() {
 	};
 
 });
+
+function getElementByIdXML(the_node,the_id) { 
+//get all the tags in the doc node_tags = 
+the_node.getElementsByTagName('*'); 
+for (i=0;i<node_tags.length;i++) {
+ //is there an id attribute? 
+ if (node_tags[i].hasAttribute('id')) { 
+ //if there is, test its value 
+ if (node_tags[i].getAttribute('id') == the_id) { 
+ //and return it if it matches 
+ return node_tags[i]; 
+} } } }
