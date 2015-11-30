@@ -34,25 +34,31 @@ router.get('/campgrounds/cgsAll', function(req, res, next) {
 
     //loop thru response.body and get lat&lng, create coords obj with lat&lng, push coords object to testArray in maps2
 
-        coordsArray = [];
+    var coordsArray = [];
+    var output = [];
         var splitTest = response.body.split(' ')
         // console.log(splitTest)
         for(var i=0; i<splitTest.length; i++){
-          // if(splitTest[i].substring() === 'latitude')
-          if(splitTest[i].substring(0,8) === 'latitude')
-          console.log(splitTest[i].substring(10,20), 'is what we are looking at')
-          latValue =  splitTest[i].substring(10,20)
-
-          if(splitTest[i].substring(0,9) === 'longitude')
-          console.log(splitTest[i].substring(11,23), 'we are looking for longitude ')
-          longValue =  splitTest[i].substring(11,23)
-
-        // var coords = {lat:latValue, lng:longValue}
-        // console.log('coords object = ',coords)
-        // coordsArray.push(coords)
+          if(splitTest[i].substring(0,8) === 'latitude'){
+          // console.log(splitTest[i].substring(10,20), 'is what we are looking at')
+          var latValue =  splitTest[i].substring(10,20)
+          output.push(latValue)
+          }
+          if(splitTest[i].substring(0,9) === 'longitude'){
+          // console.log(splitTest[i].substring(11,23), 'we are looking for longitude ')
+          var longValue =  splitTest[i].substring(11,23)
+          output.push(longValue)
+          }
         }
-        // console.log('coordsArray = ', coordsArray)
 
+        // for(var i=0; i<splitTest.length; i++){
+        //   if(splitTest[i].substring(0,9) === 'longitude'){
+        //   console.log(splitTest[i].substring(11,23), 'we are looking for longitude ')
+        //   var longValue =  splitTest[i].substring(11,23)
+        //   output.push(longValue)
+        //   }
+        // }
+        console.log(output, 'is output....')
 
         // coordsArray = [];
         // var latSubstring = response.body.slice(response.body.indexOf('latitude'))
