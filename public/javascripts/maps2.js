@@ -7,12 +7,14 @@ $(document).ready(function() {
 	  center: myLatlng
 	}
 	var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+//$(ajax) call to your express route for getting all lats and longs
+//$.ajax({/campgrounds/cgsAll})
 
-	var testArray = [{lat:35.5503, lng:-106.0700},{lat:39.3403, lng:-106.0400}];
-	for(var i=0; i<testArray.length; i++){
-
+//set coordsArray = response from ajax call
+	var coordsArray = [{lat:35.5503, lng:-106.0700},{lat:39.3403, lng:-106.0400}];
+	for(var i=0; i<coordsArray.length; i++){
 		var marker = new google.maps.Marker({
-		    position: testArray[i],
+		    position: coordsArray[i],
 		    title:"Hello Campground"
 		});
 // To add the marker to the map, call setMap();
@@ -21,14 +23,3 @@ $(document).ready(function() {
 
 });
 
-function getElementByIdXML(the_node,the_id) { 
-//get all the tags in the doc node_tags = 
-the_node.getElementsByTagName('*'); 
-for (i=0;i<node_tags.length;i++) {
- //is there an id attribute? 
- if (node_tags[i].hasAttribute('id')) { 
- //if there is, test its value 
- if (node_tags[i].getAttribute('id') == the_id) { 
- //and return it if it matches 
- return node_tags[i]; 
-} } } }

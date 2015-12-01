@@ -1,16 +1,6 @@
 $(document).ready(function() {
   console.log("The map document is ready!");
 
-// $(function() {
-  
-//     var facilityId = []; //returned from the API
-//     var allLatlng = []; //returned from the API
-//     var allMarkers = []; //returned from the API
-//     var facilityName = []; //returned from the API
-//     var infowindow = null;
-//     var pos;
-//     var userCords;
-//     var tempMarkerHolder = [];
 
 console.log('OOOOOOOOOOOOOOOOOOOOOOOO')
 
@@ -21,84 +11,61 @@ console.log('OOOOOOOOOOOOOOOOOOOOOOOO')
         xhrFields: {
           withCredentials: false
         },
-        url: "http://api.amp.active.com/camping/campgrounds/?pstate=CO&pname=Rocky+Mountain+National+Park&arvdate=02%2F12%2F2016&lengthOfStay=5&siteType=10001&api_key=6x8gz7qm68nwaj9ckzg3z5yg",
+        url: "http://api.amp.active.com/camping/campgrounds?pname=ASPEN&api_key=6x8gz7qm68nwaj9ckzg3z5yg",
         dataType: 'xml',
 
         success: function (data) {
+          //////////
+          var campgrounds = response.body
 
-           $.each(data.results, function (i, val) {
-            facilityId.push(val.id);
-            facilityName.push(val.facilityName);
-           });
-            
-          console.log(facilityName);
-          
-          var counter = 0;
-          //Now, use the id to get detailed info
-          // $.each(facilityId, function (k, v){
-          //   $.ajax({
-          //     type: "GET",
-          //     contentType: "application/xml; charset=utf-8",
-          //     // submit a get request to the restful service
-          //     url: " http://api.amp.active.com/camping/campgrounds?{queryString params}&api_key=" + v,
-          //     dataType: 'xml',
-          //     success: function (data) {
+          var coordsArray = [];
+          var tempArray = [];
+          var splitData = response.body.split(' ')
 
-          //     for (var key in data) {
+            for(var i=0; i<splitData.length; i++){
+              if(splitData[i].substring(0,8) === 'latitude'){
+                var latValue = splitData[i].substring(10,20)
+                tempArray.push(latValue)
+              }
+              if(splitData[i].substring(0,9) === 'longitude'){
+                var longValue = splitData[i].substring(11,23)
+                tempArray.push(longValue)
+              }
+            }
 
-          //       var results = data[key];
-                
-          //       //convert values to floats, to play nice with .LatLng() below.
-          //       var latitude = landmarkLat; //????parsing syntax
-          //       var longitude = landmarkLong;
-                
-          //       //set the markers.    
-          //       myLatlng = new google.maps.LatLng(latitude,longitude);
-              
-          //       allMarkers = new google.maps.Marker({
-          //         position: myLatlng,
-          //         map: map,
-          //         title: facilityName[counter],
-          //         html: 
-          //             '<div class="markerPop">' +
-          //             '<h1>' + facilityName[counter] + '</h1>' + 
-          //             '</div>'
-          //       });
+            for(i=0; i<tempArray.length; i+=2){
+              var coordSet = {lat:tempArray[i],lng:tempArray[i+1]}
+              coordsArray.push(coordSet)
+            }
 
-          //       //put all lat long in array
-          //       allLatlng.push(myLatlng);
-                
-          //       //Put the markers in an array
-          //       tempMarkerHolder.push(allMarkers);
-                
-          //       counter++;
-          //       //console.log(counter);
-          //     };
-                
-          //     google.maps.event.addListener(allMarkers, 'click', function () {
-          //       infowindow.setContent(this.html);
-          //       infowindow.open(map, this);
-          //     });
-                
-          //       //console.log(allLatlng);
-          //       //  Make an array of the LatLng's of the markers you want to show
-          //       //  Create a new viewpoint bound
-          //       var bounds = new google.maps.LatLngBounds ();
-          //       //  Go through each...
-          //       for (var i = 0, LtLgLen = allLatlng.length; i < LtLgLen; i++) {
-          //         //  And increase the bounds to take this point
-          //         bounds.extend (allLatlng[i]);
-          //       }
-          //       //  Fit these bounds to the map
-          //       map.fitBounds (bounds);
-    
-          //     }
-          //   });
-          // }); //end .each
+            // console.log('coordsArray = ', coordsArray..........................................)
+
+
+                var myLatlng = new google.maps.LatLng(39.5403, -106.0600);
+                var mapOptions = {
+                  zoom: 5,
+                  center: myLatlng
+                }
+                var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+                var coordsArray = [{lat:35.5503, lng:-106.0700},{lat:39.3403, lng:-106.0400}];
+                for(var i=0; i<coordsArray.length; i++){
+                  var marker = new google.maps.Marker({
+                      position: coordsArray[i],
+                      title:"Hello Campground"
+                  });
+              // To add the marker to the map, call setMap();
+                marker.setMap(map);
+                };
+
+          //////////
+
+         
+
         }
-      });
+      // });
 
-        return false; // important: prevent the form from submitting
+        // return false; // important: prevent the form from submitting
     });
 });
 

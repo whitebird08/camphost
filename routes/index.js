@@ -7,7 +7,7 @@ var Reservations = db.get('reservation')
 var Campers = db.get('camper');
 var dbqFunctions = require("../lib/dbq.js");
 var unirest = require('unirest');
-// var xmlToJSON = require('xmlToJSON');
+
 
 
 // {
@@ -29,35 +29,64 @@ router.get('/campgrounds/cgsAll', function(req, res, next) {
   console.log('ZZZZZZZZZZZZZZZ')
   unirest.get( "http://api.amp.active.com/camping/campgrounds?pname=ASPEN&api_key=6x8gz7qm68nwaj9ckzg3z5yg")
   .end(function (response) {
-    // console.log(response.body, 'is response.body')
     var campgrounds = response.body
-
+    console.log(response.body)
     var coordsArray = [];
-    var output = [];
-        var splitTest = response.body.split(' ')
-        // console.log(splitTest)
-        for(var i=0; i<splitTest.length; i++){
-          if(splitTest[i].substring(0,8) === 'latitude'){
-          var latValue =  splitTest[i].substring(10,20)
-          output.push(latValue)
-          }
-          if(splitTest[i].substring(0,9) === 'longitude'){
-          var longValue =  splitTest[i].substring(11,23)
-          output.push(longValue)
-          }
-        }
+    var tempArray = [];
+    var splitData = response.body.split(' ')
 
-        for(i=0; i<output.length; i+=2){
-          var coordSet = {lat:output[i],lng:output[i+1]}
-          coordsArray.push(coordSet)
+      for(var i=0; i<splitData.length; i++){
+        if(splitData[i].substring(0,8) === 'latitude'){
+          var latValue =  splitData[i].substring(10,20)
+          tempArray.push(Number(latValue))
         }
-        
-        console.log('coordsArray = ', coordsArray)
+        if(splitData[i].substring(0,9) === 'longitude'){
+          var longValue =  splitData[i].substring(11,23)
+          tempArray.push(Number(longValue))
+        }
+      }
 
-    res.render('campgrounds/cgsAll', { title: 'All Campgrounds', campgrounds:campgrounds
-    });
+      for(i=0; i<tempArray.length; i+=2){
+        var coordSet = {lat:tempArray[i],lng:tempArray[i+1]}
+        coordsArray.push(coordSet)
+      }
+
+      console.log('coordsArray = ', coordsArray)
+
+
+    
+    res.render('campgrounds/cgsAll', { title: 'All Campgrounds', campgrounds:campgrounds});
+
   });
 });
+
+
+// router.get('/allCampgrounds', function(req,res,next){
+//   unirest.get( "http://api.amp.active.com/camping/campgrounds?pname=ASPEN&api_key=6x8gz7qm68nwaj9ckzg3z5yg")
+//   .end(function (response) {
+//     var campgrounds = response.body
+//     console.log(response.body)
+//     var coordsArray = [];
+//     var tempArray = [];
+//     var splitData = response.body.split(' ')
+
+//       for(var i=0; i<splitData.length; i++){
+//         if(splitData[i].substring(0,8) === 'latitude'){
+//           var latValue =  splitData[i].substring(10,20)
+//           tempArray.push(latValue)
+//           tempArray.push(longValue)
+//         }
+//       }
+
+//       for(i=0; i<tempArray.length; i+=2){
+//         var coordSet = {lat:tempArray[i],lng:tempArray[i+1]}
+//         }
+//         if(splitData[i].substring(0,9) === 'longitude'){
+//           var longValue =  splitData[i].substring(11,23)
+//         coordsArray.push(coordSet)
+//       };
+
+// });
 
 /////
 
@@ -74,6 +103,8 @@ router.get('/campgrounds/cg/:id', function(req, res, next) {
     });
   });
 });
+
+
 
 // router.get('/campgrounds/sitesAll', function(req, res, next) {
 //   Sites.find({}, function (err, sites){
