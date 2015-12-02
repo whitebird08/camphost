@@ -9,6 +9,9 @@ $(document).ready(function() {
 	var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 //$(ajax) call to your express route for getting all lats and longs
 //$.ajax({/campgrounds/cgsAll})
+	// $.get( '/campgrounds/cgsAll',parameters, function(data) {
+	//  $('#results').html(data);
+	//  console.log(, '........................data......')
 
 //set coordsArray = response from ajax call
 	var coordsArray = [{lat:35.5503, lng:-106.0700},{lat:39.3403, lng:-106.0400}];
