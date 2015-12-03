@@ -23,42 +23,8 @@ var bcrypt = require('bcrypt');
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Camp Host' });
 });
-////
-router.get('/campgrounds/cgsAll', function(req, res, next) {
-  // unirest.get( "http://api.amp.active.com/camping/campgrounds?pname=ASPEN&api_key=6x8gz7qm68nwaj9ckzg3z5yg")
-  // .end(function (response) {
-  //   var campgrounds = response.body
-  //   // console.log(response.body)
-  //   var coordsArray = [];
-  //   var tempArray = [];
-  //   var splitData = response.body.split(' ')
 
-  //     for(var i=0; i<splitData.length; i++){
-  //       if(splitData[i].substring(0,8) === 'latitude'){
-  //         var latValue =  splitData[i].substring(10,20)
-  //         tempArray.push(Number(latValue))
-  //       }
-  //       if(splitData[i].substring(0,9) === 'longitude'){
-  //         var longValue =  splitData[i].substring(11,23)
-  //         tempArray.push(Number(longValue))
-  //       }
-  //     }
-
-  //     for(i=0; i<tempArray.length; i+=2){
-  //       var coordSet = {lat:tempArray[i],lng:tempArray[i+1]}
-  //       coordsArray.push(coordSet)
-  //     }
-
-      // console.log('coordsArray = ', coordsArray)
-
-    res.render('campgrounds/cgsAll', { title: 'All Campgrounds'
-      // campgrounds:campgrounds
-    // });
-  });
-});
-
-///
-router.get('/list', function(req, res, next) {
+router.get('/parse', function(req, res, next) {
 
   unirest.get( "http://api.amp.active.com/camping/campgrounds?pname=ASPEN&api_key=6x8gz7qm68nwaj9ckzg3z5yg")
   .end(function (response) {
@@ -69,6 +35,7 @@ router.get('/list', function(req, res, next) {
         result.resultset.result.map(function(r){
           var lng = Number(r['$'].longitude)
           var lat = Number(r['$'].latitude)
+          console.log((r['$']))
           data.push( { lat: lat, lng: lng } )
         });
     });
@@ -78,14 +45,12 @@ router.get('/list', function(req, res, next) {
   });  
 });
 
-
-/////
-// router.get('/campgrounds/cgsAll', function(req, res, next) {
-//   Campgrounds.find({}, function (err, campgrounds){   
-//     res.render('campgrounds/cgsAll', { title: 'All Campgrounds', allCampgrounds: campgrounds 
-//     });
-//   });
-// });
+router.get('/campgrounds/cgsAll', function(req, res, next) {
+  Campgrounds.find({}, function (err, campgrounds){   
+    res.render('campgrounds/cgsAll', { title: 'All Campgrounds', allCampgrounds: campgrounds 
+    });
+  });
+});
 
 router.get('/campgrounds/cg/:id', function(req, res, next) {
   Sites.find({}, function (err, sites) {

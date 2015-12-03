@@ -5,17 +5,17 @@ block content
   p Welcome to #{title}
 
     #map
-    p=campgrounds
+    //- p=campgrounds
 
-    //- table
-    //-   thead
-    //-     tr
-    //-       th All Campgrounds
-    //-       th
-    //-   for campgrounds in allCampgrounds
-    //-     tr
-    //-       td= campgrounds.facilityName
-    //-         a(href='/campgrounds/cg/' + campgrounds._id) Select
+    table
+      thead
+        tr
+          th All Campgrounds
+          th
+      for campgrounds in allCampgrounds
+        tr
+          td= campgrounds.facilityName
+            a(href='/campgrounds/cg/' + campgrounds._id) Select
 
 
 
