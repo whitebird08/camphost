@@ -5,16 +5,18 @@ var Campgrounds = db.get('campground');
 var Sites = db.get('site');
 var Reservations = db.get('reservation')
 var Campers = db.get('camper');
-var dbqFunctions = require("../lib/helper.js");
 var unirest = require('unirest');
 var parseString = require('xml2js').parseString;
+var helper = require("../lib/helper.js");
 
 router.get('/campers/register', function(req, res, next) {
   res.render('campers/register', { title: 'Camper Registration' });
 });
 
 router.post('/campers/register', function(req, res, next){
- helper.register().then(function(result){})
+  helper.register(req, res, next).then(function(result){
+    res.render('campers/register', {error: 'Email / Password cannot be blank'})
+ })
 })
 
 router.get('/campers/login', function(req, res, next) {
