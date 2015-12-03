@@ -45,37 +45,38 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/parse', function(req, res, next) {
-
+  helper.parseLatLng(req, res, next).then(function(result){
+    return result
+  })
   unirest.get( "http://api.amp.active.com/camping/campgrounds?pname=ASPEN&api_key=6x8gz7qm68nwaj9ckzg3z5yg")
-  .end(function (response) {
-    var campgroundsXML = response.body
-    var data = []
-    parseString(campgroundsXML, function (err, result) {
+    .end(function (response) {
+      var campgroundsXML = response.body
+      var data = []
+      parseString(campgroundsXML, function (err, result) {
 
-        result.resultset.result.map(function(r){
-          var lng = Number(r['$'].longitude)
-          var lat = Number(r['$'].latitude)
-          console.log((r['$']))
-          data.push( { lat: lat, lng: lng } )
-        });
+          result.resultset.result.map(function(r){
+            var lng = Number(r['$'].longitude)
+            var lat = Number(r['$'].latitude)
+            console.log((r['$']))
+            data.push( { lat: lat, lng: lng } )
+          });
+      });
+
+      console.log(data)
+      res.json(data);
     });
-
-    console.log(data)
-    res.json(data);
-  });  
+  
 });
 
 router.get('/campgrounds/cgsAll', function(req, res, next) {
-  Campgrounds.find({}, function (err, campgrounds){   
-    res.render('campgrounds/cgsAll', { title: 'All Campgrounds', allCampgrounds: campgrounds 
-    });
+  helper.findCampgrounds(req, res, next).then(function(result){
+    return result
   });
 });
 
 router.get('/campgrounds/cg/:id', function(req, res, next) {
-  Sites.find({}, function (err, sites) {
-    res.render('campgrounds/cg', { title: 'Campground Name Here', allSites: sites
-    });
+  helper.findSites(req, res, next).then(function(result){
+    return result
   });
 });
 
@@ -88,8 +89,8 @@ router.get('/campgrounds/cg/:id', function(req, res, next) {
 // });
            
 router.get('/campgrounds/site/:id', function(req, res, next) {
-  Sites.findOne({_id: req.params.id}, function (err, sites){
-  res.render('campgrounds/site', { title: 'Site Number', thisSite: sites });
+  helper.findOneSite(req, res, next).then(function(result){
+    return result
   })
 });
 

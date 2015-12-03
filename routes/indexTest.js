@@ -25,7 +25,6 @@
 //   });  
 // });
 
-
 // router.get('/campgrounds/cgsAll', function(req, res, next) {
 //     //helper.findCampgrounds().then(function(result){
 //     res.render('campgrounds/cgsAll', { title: 'All Campgrounds', allCampgrounds: campgrounds 
