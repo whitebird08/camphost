@@ -14,15 +14,16 @@ router.get('/campers/register', function(req, res, next) {
 });
 
 router.post('/campers/register', function(req, res, next){
-  helper.register(req, res, next).then(function(result){
-    res.render('campers/register', {error: 'Email / Password cannot be blank'})
+ helper.register(req, res, next).then(function(result){
+  return result
  })
 })
+
 
 router.get('/campers/login', function(req, res, next) {
   res.render('campers/login', { title: 'Camper Login' });
 });
-
+//invalid pw not working
 router.post('/campers/login', function(req, res,next){
   Campers.findOne({email:req.body.email}).then(function(camper){
     if (camper) {  
@@ -95,11 +96,9 @@ router.get('/campgrounds/site/:id', function(req, res, next) {
 
 
 router.get('/campers/dash', function(req, res, next) {
-  Reservations.find({}, function (err, reservations){
-  // Reservations.find({ camperId: { $in: req.params} }, function (err, reservations){  
-    res.render('campers/dash', { title: 'Camper Dashboard', allReservations: reservations 
-    });
-  })
+  helper.dash(req, res, next).then(function(result){
+    return result
+ })
 });
 
 router.get('/reservations/index', function(req, res, next) {
