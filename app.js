@@ -9,7 +9,7 @@ require('dotenv').load()
 var unirest = require('unirest');
 var cors = require('cors');
 
-var routes = require('./routes/index');
+var routes = require('./routes/indexTest2');
 // var users = require('./routes/users');
 var campgrounds = require('./routes/cg');
 var reservations = require('./routes/res');

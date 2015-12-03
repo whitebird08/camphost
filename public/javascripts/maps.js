@@ -4,7 +4,7 @@ $(document).ready(function() {
   
   $.ajax({
       method: 'GET',
-      url: '../list',            
+      url: '../parse',            
       success: function(data) {
         for(var i=0; i < data.length; i++){
           var marker = new google.maps.Marker({
