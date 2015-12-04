@@ -1,6 +1,6 @@
 $(document).ready(function() {
         var myLatlng = new google.maps.LatLng(39.5403, -106.0600);
-        var map = new google.maps.Map(document.getElementById("map"), {zoom: 5, center: myLatlng});
+        var map = new google.maps.Map(document.getElementById("map"), {zoom: 8, center: myLatlng});
   
   $.ajax({
       method: 'GET',

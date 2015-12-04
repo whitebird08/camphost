@@ -47,7 +47,10 @@ router.get('/parse', function(req, res, next) {
   helper.parseLatLng(req, res, next).then(function(result){
     return result
   })
-  unirest.get( "http://api.amp.active.com/camping/campgrounds?pname=ASPEN&api_key=6x8gz7qm68nwaj9ckzg3z5yg")
+
+  // unirest.get( "http://api.amp.active.com/camping/campsites?contractCode=CO&parkId=50032&eqplen=50&api_key=6x8gz7qm68nwaj9ckzg3z5yg")
+  unirest.get( "http://api.amp.active.com/camping/campgrounds?pstate=CO&api_key=6x8gz7qm68nwaj9ckzg3z5yg")
+  // unirest.get( "http://api.amp.active.com/camping/campgrounds?pname=ASPEN&api_key=6x8gz7qm68nwaj9ckzg3z5yg")
     .end(function (response) {
       var campgroundsXML = response.body
       var data = []
@@ -61,7 +64,7 @@ router.get('/parse', function(req, res, next) {
           });
       });
 
-      console.log(data)
+      // console.log(data) 
       res.json(data);
     });
   
@@ -91,8 +94,6 @@ router.get('/campgrounds/site/:id', function(req, res, next) {
   })
 });
 
-
-
 router.get('/campers/dash', function(req, res, next) {
   helper.dash(req, res, next).then(function(result){
     return result
@@ -105,7 +106,6 @@ router.get('/reservations/index/:id', function(req, res, next) {
   });
 });
 
-
 router.post('/reservations/index', function(req, res, next){
   console.log(req.session.camper._id,"Session");
   console.log(req.headers.referer,'siteId');
@@ -113,12 +113,8 @@ router.post('/reservations/index', function(req, res, next){
   req.body.siteId = header[header.length-1];
   req.body.camperId = req.session.camper._id;
   Reservations.insert(req.body);   
-  
-  // joinCamperReservation();
-   // console.log('lonely string.....')
-  // console.log(reservation, 'reservation.....')
 
- res.redirect('/campers/dash')
+  res.redirect('/campers/dash')
 })
 
 // router.post('/reservations/logout', function(req, res, next){
