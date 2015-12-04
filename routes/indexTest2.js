@@ -14,11 +14,10 @@ router.get('/campers/register', function(req, res, next) {
 });
 
 router.post('/campers/register', function(req, res, next){
- helper.register(req, res, next).then(function(result){
-  return result
- })
+  helper.register(req, res, next).then(function(result){
+    return result
+  })
 })
-
 
 router.get('/campers/login', function(req, res, next) {
   res.render('campers/login', { title: 'Camper Login' });
@@ -80,8 +79,6 @@ router.get('/campgrounds/cg/:id', function(req, res, next) {
   });
 });
 
-
-
 // router.get('/campgrounds/sitesAll', function(req, res, next) {
 //   Sites.find({}, function (err, sites){
 //   res.render('campgrounds/sitesAll', { title: 'All Sites For This Campground', allSites: sites });
@@ -99,34 +96,34 @@ router.get('/campgrounds/site/:id', function(req, res, next) {
 router.get('/campers/dash', function(req, res, next) {
   helper.dash(req, res, next).then(function(result){
     return result
- })
+  })
 });
 
-router.get('/reservations/index', function(req, res, next) {
-  Sites.findOne({_id: req.params.id}, function (err, sites){
+router.get('/reservations/index/:id', function(req, res, next) {
+  Sites.findOne({_id: req.param.id}, function (err, sites){
   res.render('reservations/index', { title: 'Make A Reservation', thisSite: sites });
   });
 });
 
+
 router.post('/reservations/index', function(req, res, next){
+  console.log(req.session.camper._id,"Session");
+  console.log(req.headers.referer,'siteId');
+  var header = req.headers.referer.split("/");
+  req.body.siteId = header[header.length-1];
+  req.body.camperId = req.session.camper._id;
+  Reservations.insert(req.body);   
+  
   // joinCamperReservation();
-  Reservations.insert(req.params, {
-    "facilityName" : reservation.campground.facilityName,
-    "arrivalDate" : reservation.campground.arrivalDate,
-    "lengthOfStay" : reservation.campground.lengthOfStay,
-    "parkId" : reservation.site.parkId,
-    "loopName" : reservation.site.loopName,
-    "siteId" : reservation.site.siteId,
-    "siteType" : reservation.site.siteType,
-    "camperId" : reservation.camper.camperId
-  });
-  res.redirect('/campers/dash')
+   // console.log('lonely string.....')
+  // console.log(reservation, 'reservation.....')
+
+ res.redirect('/campers/dash')
 })
 
 // router.post('/reservations/logout', function(req, res, next){
 //   res.redirect('/index')
 // })
-
 
 
 module.exports = router;
