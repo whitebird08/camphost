@@ -17,3 +17,27 @@ $(document).ready(function() {
   });
 
 });
+
+
+// var markerA = new google.maps.Marker({
+//     map: map,
+//     position: new google.maps.LatLng(0, 0),
+//     customInfo: "Marker A"
+// });
+
+// var markerB = new google.maps.Marker({
+//     map: map,
+//     position: new google.maps.LatLng(-10, 0)
+// });
+// markerB.customInfo = "Marker B";
+
+// var markerC = new google.maps.Marker({
+//     map: map,
+//     position: new google.maps.LatLng(-20, 0)
+// });
+// markerC['customInfo'] = "Marker C";
+// Then to retrieve it in a similar manner:
+
+// google.maps.event.addListener(markerA, 'click', function() {
+//     alert(this.customInfo);
+// });

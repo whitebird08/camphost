@@ -52,7 +52,7 @@ Promise.all([
   Campgrounds.remove().then(function () {
     return Promise.all([
       Campgrounds.insert({
-        parkId:"50032",
+       
         facilityName:"MORRAINE PARK",
         facilityId:"190306", 
         landmarkName:true, 

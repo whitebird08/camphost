@@ -54,15 +54,37 @@ router.get('/parse', function(req, res, next) {
     .end(function (response) {
       var campgroundsXML = response.body
       var data = []
+      var parkID = 0;
       parseString(campgroundsXML, function (err, result) {
 
           result.resultset.result.map(function(r){
             var lng = Number(r['$'].longitude)
             var lat = Number(r['$'].latitude)
+            parkID = Number(r['$'].facilityID)
             console.log((r['$']))
             data.push( { lat: lat, lng: lng } )
           });
       });
+
+      unirest.get( "http://api.amp.active.com/camping/campsites?contractCode=CO&parkId=" + parkID + "&eqplen=50&api_key=6x8gz7qm68nwaj9ckzg3z5yg")
+      // unirest.get( "http://api.amp.active.com/camping/campgrounds?pstate=CO&api_key=6x8gz7qm68nwaj9ckzg3z5yg")
+      // unirest.get( "http://api.amp.active.com/camping/campgrounds?pname=ASPEN&api_key=6x8gz7qm68nwaj9ckzg3z5yg")
+      .end(function (response) {
+        var campsitesXML = response.body
+        var data = []
+        parseString(campsitesXML, function (err, result) {
+
+        
+              // console.log(result, "THIS IS IT!!!!!!!!!!!!!!!!!")
+
+              // data.push( { campgroundName = parkId } )
+            
+        });
+
+      // console.log(data) 
+      // res.json(data);
+    });
+  
 
       // console.log(data) 
       res.json(data);
@@ -75,6 +97,33 @@ router.get('/campgrounds/cgsAll', function(req, res, next) {
     return result
   });
 });
+
+//////////////campsites
+// router.get('/parseSites', function(req, res, next) {
+//   helper.parseLatLng(req, res, next).then(function(result){
+//     return result
+//   })
+//   unirest.get( "http://api.amp.active.com/camping/campsites?contractCode=CO&parkId=50032&eqplen=50&api_key=6x8gz7qm68nwaj9ckzg3z5yg")
+//   // unirest.get( "http://api.amp.active.com/camping/campgrounds?pstate=CO&api_key=6x8gz7qm68nwaj9ckzg3z5yg")
+//   // unirest.get( "http://api.amp.active.com/camping/campgrounds?pname=ASPEN&api_key=6x8gz7qm68nwaj9ckzg3z5yg")
+//     .end(function (response) {
+//       var campsitesXML = response.body
+//       var data = []
+//       parseString(campsitesXML, function (err, result) {
+
+      
+//             console.log(result, "THIS IS IT!!!!!!!!!!!!!!!!!")
+
+//             // data.push( { campgroundName = parkId } )
+          
+//       });
+
+//       // console.log(data) 
+//       res.json(data);
+//     });
+  
+// });
+/////////////////////
 
 router.get('/campgrounds/cg/:id', function(req, res, next) {
   helper.findSites(req, res, next).then(function(result){
@@ -112,6 +161,9 @@ router.post('/reservations/index', function(req, res, next){
   var header = req.headers.referer.split("/");
   req.body.siteId = header[header.length-1];
   req.body.camperId = req.session.camper._id;
+  req.body.loopName = req.session.loopName;
+  console.log(req.session, ".....req.session")
+  req.body.campgroundId = req.session.campgroundId;
   Reservations.insert(req.body);   
 
   res.redirect('/campers/dash')
