@@ -9,13 +9,19 @@ $(document).ready(function() {
         for(var i=0; i < data.length; i++){
           var marker = new google.maps.Marker({
               position: data[i],
-              title:"Hello Campground"
+              title:"Hello Campground",
+              customInfo: "Marker Info Awesomeness"
+              
           }); 
         marker.setMap(map);
+        //////
+        google.maps.event.addListener(marker, 'click', function() {
+          alert(this.customInfo);
+        });
+        ////////
         }
       }
   });
-
 });
 
 
