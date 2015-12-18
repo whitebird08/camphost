@@ -22,7 +22,7 @@ router.post('/campers/register', function(req, res, next){
 router.get('/campers/login', function(req, res, next) {
   res.render('campers/login', { title: 'Camper Login' });
 });
-//invalid pw not working
+//invalid pw message not working
 router.post('/campers/login', function(req, res,next){
   Campers.findOne({email:req.body.email}).then(function(camper){
     if (camper) {  
@@ -72,20 +72,13 @@ router.get('/parse', function(req, res, next) {
       .end(function (response) {
         var campsitesXML = response.body
         var data = []
-        parseString(campsitesXML, function (err, result) {
-
-        
+        parseString(campsitesXML, function (err, result) {        
               // console.log(result, "THIS IS IT!!!!!!!!!!!!!!!!!")
-
               // data.push( { campgroundName = parkId } )
-            
         });
-
       // console.log(data) 
       // res.json(data);
     });
-  
-
       // console.log(data) 
       res.json(data);
     });
@@ -97,33 +90,6 @@ router.get('/campgrounds/cgsAll', function(req, res, next) {
     return result
   });
 });
-
-//////////////campsites
-// router.get('/parseSites', function(req, res, next) {
-//   helper.parseLatLng(req, res, next).then(function(result){
-//     return result
-//   })
-//   unirest.get( "http://api.amp.active.com/camping/campsites?contractCode=CO&parkId=50032&eqplen=50&api_key=6x8gz7qm68nwaj9ckzg3z5yg")
-//   // unirest.get( "http://api.amp.active.com/camping/campgrounds?pstate=CO&api_key=6x8gz7qm68nwaj9ckzg3z5yg")
-//   // unirest.get( "http://api.amp.active.com/camping/campgrounds?pname=ASPEN&api_key=6x8gz7qm68nwaj9ckzg3z5yg")
-//     .end(function (response) {
-//       var campsitesXML = response.body
-//       var data = []
-//       parseString(campsitesXML, function (err, result) {
-
-      
-//             console.log(result, "THIS IS IT!!!!!!!!!!!!!!!!!")
-
-//             // data.push( { campgroundName = parkId } )
-          
-//       });
-
-//       // console.log(data) 
-//       res.json(data);
-//     });
-  
-// });
-/////////////////////
 
 router.get('/campgrounds/cg/:id', function(req, res, next) {
   helper.findSites(req, res, next).then(function(result){
@@ -161,7 +127,7 @@ router.post('/reservations/index', function(req, res, next){
   var header = req.headers.referer.split("/");
   req.body.siteId = header[header.length-1];
   req.body.camperId = req.session.camper._id;
-  req.body.loopName = req.session.loopName;
+  req.body.loopName = req.body.loopName;
   console.log(req.session, ".....req.session")
   req.body.campgroundId = req.session.campgroundId;
   Reservations.insert(req.body);   
