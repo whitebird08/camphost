@@ -9,8 +9,7 @@ $(document).ready(function() {
         for(var i=0; i < data.length; i++){
           var marker = new google.maps.Marker({
               position: data[i],
-              title:"Hello Campground"
-           
+              title:"Hello Campground"          
           });
           ////////
           var contentString = '<div id="content">'+
@@ -18,16 +17,7 @@ $(document).ready(function() {
             '</div>'+
             '<h1 id="firstHeading" class="firstHeading">Campground</h1>'+
             '<div id="bodyContent">'+
-            '<p><b>campground</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-            'sandstone rock formation in the southern part of the '+
-            'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-            'south west of the nearest large town, Alice Springs; 450&#160;km '+
-            '(280&#160;mi) by road. Kata Tjuta and campground are the two major '+
-            'features of the campground - Kata Tjuta National Park. campground is '+
-            'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-            'Aboriginal people of the area. It has many springs, waterholes, '+
-            'rock caves and ancient paintings. campground is listed as a World '+
-            'Heritage Site.</p>'+
+            '<p><b>campground</p>'+
             '<p>Attribution: campground, <a href="https://en.wikipedia.org/w/index.php?title=campground&oldid=297882194">'+
             'https://en.wikipedia.org/w/index.php?title=campground</a> '+
             '(last visited June 22, 2009).</p>'+
@@ -41,11 +31,19 @@ $(document).ready(function() {
           }); 
         marker.setMap(map);
 
-        marker.addListener('click', function() {
-          infowindow.open(map, marker);
+        // marker.addListener('click', function() {
 
-        });
+          // infowindow.open(map, marker);
 
+        // });
+//////
+        google.maps.event.addListener(marker,'click', (function(marker,contentString,infowindow){ 
+        return function() {
+           infowindow.setContent(contentString);
+           infowindow.open(map,marker);
+        };
+    })(marker,contentString,infowindow));
+///////
         }
       }
   });
