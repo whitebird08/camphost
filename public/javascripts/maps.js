@@ -6,31 +6,31 @@ $(document).ready(function() {
       method: 'GET',
       url: '../parse',            
       success: function(data) {
-         var infowindow = new google.maps.InfoWindow({
-            content: contentString
-          }); 
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        }); 
+
         for(var i=0; i < data.length; i++){
+          var iconBase = 'http://www.googlemapsmarkers.com/v1/009900/';
           var marker = new google.maps.Marker({
               position: data[i],
+              icon: iconBase ,
               title:"Hello Campground"          
           });
+
           var contentString = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">Campground</h1>'+
+            '<h1>Campground</h1>'+
             '<div id="bodyContent">'+
             '<p><b>campground</p>'+
-            '<p>Attribution: campground, <a href="https://en.wikipedia.org/w/index.php?title=campground&oldid=297882194">'+
-            'https://en.wikipedia.org/w/index.php?title=campground</a> '+
-            '(last visited June 22, 2009).</p>'+
+            '<a href="/campgrounds/cg/"' + '"campgrounds._id")>' + 'Select' + '</a>' +
             '</div>'+
+
             '</div>';
-          
-         
+
+          console.log(data[i], 'dataaaaa')
           marker.setMap(map);
           google.maps.event.addListener(marker,'click', (function(marker,contentString,infowindow){ 
             return function(){
-              // infowindow.close(map, marker);
               infowindow.setContent(contentString);
               infowindow.open(map,marker);
             };
